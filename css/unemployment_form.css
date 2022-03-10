@@ -1,0 +1,219 @@
+body{
+    margin-top: 50px;
+}
+/* create account*/
+.darkblue{
+    background: darkblue;
+}
+
+#register ul li{
+    display: inline-block;
+    list-style: none;
+    justify-content: center;
+    transform: translate(600%,0%);
+}
+
+#login ul li{
+    display: inline-block;
+    list-style: none;
+    justify-content: center;
+    transform: translate(700%,0%);
+}
+
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: 37px;
+    height: 37px;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 50%;
+    padding: 10px;
+}
+ .fa-facebook{
+    color: #3b5998;
+    border: 1px solid grey;
+    width: 37px;
+    height: 37px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 10px;
+
+
+}
+
+.fa-linkedin{
+    color: #0e76a8;
+    border: 1px solid grey;
+    width: 37px;
+    height: 37px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 10px;
+
+}
+
+.grey{
+    color: grey;
+}
+
+
+#register .signupBtn{
+    width: 30%;
+    margin-left: 200px;
+    color: white;
+}
+#register .signupBtn:hover{
+    background: lightblue;
+    color: black;
+}
+
+#register .signinBtn{
+    width: 30%;
+    margin-left: 170px;
+    color: white;
+}
+#register .signinBtn:hover{
+    width: 30%;
+    background: lightblue;
+    color: black;
+}
+
+#login .signinBtn{
+    width: 30%;
+    margin-left: 200px;
+    color: white;
+}
+#login .signinBtn:hover{
+    background: lightblue;
+    color: black;
+}
+
+#login .signupBtn{
+    width: 30%;
+    margin-left: 170px;
+    color: white;
+}
+#login .signupBtn:hover{
+    width: 30%;
+    background: lightblue;
+    color: black;
+}
+#forgotpassword{
+    margin-top: 50px;
+}
+.forgotpass:hover{
+    color: red;
+}
+#forgotpassword .resetBtn{
+    width: 30%;
+    margin-left: 200px;
+    color: white;
+    background: darkblue;
+}
+#forgotpassword .resetBtn:hover{
+    background: lightblue;
+    color: black;
+}
+/* Home */
+
+.main input,
+.main select,
+#education input,
+#workexperience input{
+    background-color: lightgrey;
+}
+
+h2{
+    text-align: center;
+    color: darkblue;
+}
+.body{
+    border: 1px solid grey;
+}
+
+.imagesty{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.inputstyle{
+    padding: 3px;
+    box-sizing: border-box;
+    margin: 5px;
+}
+
+#button{
+    width: 20%;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 8px;
+    background-color: black;
+    float: right;
+    font-size: large;
+    color: white;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+.required{
+    color:red;
+}
+
+.pstyles{
+    margin-right: 40%;
+    margin-left: 40%;
+
+}
+
+#navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#navbar a{
+    text-decoration: none;
+}
+
+#navbar li{
+    list-style: none;
+    padding: 0 20px;
+    position:relative;
+}
+
+#navbar li a{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #00008D;
+    transition: 0.3s ease;
+}
+
+#navbar li a:hover,
+#navbar li a.active{
+    color:#00008D;
+}
+
+#navbar li a.active::after,
+#navbar li a:hover::after{
+    content: "";
+    width: 30%;
+    height: 2px;
+    background-color: #00008D;
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+
+footer{
+    text-align: center;
+}
+/*contact us*/
+
