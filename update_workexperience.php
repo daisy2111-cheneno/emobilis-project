@@ -12,48 +12,8 @@ if (!isset($_SESSION["loggedin"]) or $_SESSION["loggedin"]!==true ){
 
 
 include "config.php";
-$sql_1 = "SELECT * FROM users ";
-#execute query
-$result_1 = mysqli_query($link, $sql_1);
 
-#check
-if ($result_1) {
-    $data_1 = mysqli_num_rows($result_1);
-#is there data here?
-    if ($data_1 > 0) {
-
-
-        while ($row = mysqli_fetch_array($result_1)) {
-            $id=$row['id'];
-            $lastname = $row['lastname'];
-            $firstname = $row['firstname'];
-            $emailAddress = $row['emailAddress'];
-
-        }
-    }
-}$sql_1 = "SELECT * FROM users ";
-#execute query
-$result_1 = mysqli_query($link, $sql_1);
-
-#check
-if ($result_1) {
-    $data_1 = mysqli_num_rows($result_1);
-#is there data here?
-    if ($data_1 > 0) {
-
-
-        while ($row = mysqli_fetch_array($result_1)) {
-            $id=$row['id'];
-            $lastname = $row['lastname'];
-            $firstname = $row['firstname'];
-            $emailAddress = $row['emailAddress'];
-
-        }
-    }
-}
-
-
-if (isset($_POST["update"])) {
+if (isset($_POST["update"])){
 
     $id = $_SESSION["id"];
     $up_employer = $_POST["employer"];
@@ -62,6 +22,7 @@ if (isset($_POST["update"])) {
     $up_industry = $_POST["industry"];
     $up_jobtype =$_POST['jobtype'];
     $up_skills = $_POST["skills"];
+    $up_jobdescription = $_POST["jobdescription"];
     $up_startdate =$_POST['startDate'];
     $up_enddate =$_POST['endDate'];
 
@@ -75,7 +36,7 @@ if (isset($_POST["update"])) {
 
 
     $up_sql = "UPDATE `work` SET `employer`='$up_employer',`jobtitle`='$up_jobtitle',`country`='$up_country',`industry`='$up_industry',`jobtype`='$up_jobtype',
-            `skills`='$up_skills',`startdate`='$up_startdate',`enddate`='$up_enddate',`cv`='$cvname' WHERE id ='$id'";
+            `skills`='$up_skills',`jobdescription`='$up_jobdescription',`startDate`='$up_startdate',`endDate`='$up_enddate',`cv`='$cvname', WHERE id ='$id'";
 
     $up_result=mysqli_query($link,$up_sql);
 
@@ -111,15 +72,17 @@ if (isset($_POST["update"])) {
 
                 $row = mysqli_fetch_array($result);
 
-                $employer = $_POST["employer"];
-                $jobtitle = $_POST["jobtitle"];
-                $country = $_POST["country"];
-                $industry = $_POST["industry"];
-                $jobtype =$_POST['jobtype'];
-                $skills = $_POST["skills"];
-                $startdate =$_POST['startDate'];
-                $enddate =$_POST['endDate'];
-                $cv = $row['cv'];
+                $employer = $row["employer"];
+                $jobtitle = $row["jobtitle"];
+                $country=$row['country'];
+                $industry=$row['industry'];
+                $jobtype=$row['jobtype'];
+                $startDate=$row['startDate'];
+                $endDate =$row['endDate'];
+                $skills=$row['skills'];
+                $jobdescription=$row['jobdescription'];
+                $cv =$row['cv'];
+
 
 
                 ?>
@@ -151,12 +114,21 @@ if (isset($_POST["update"])) {
             </ul>
         </div>
         <div class="row m-2">
-                    <div class="text-primary  h3">Update the Record</div>
+            <h3 class="text-primary  h3">Update the Record</h3>
+        </div>
+        <div class="row m-2">
+            <div class="card row m-2">
+                <div class="card-body">
+                    <div>
+                        <a CLASS="btn btn-primary col-md-3" href="unemployment_form.php">BACK</a>
+                    </div>
                 </div>
+
+            </div>
                 <div class="row m-2">
                     <div class="card">
                         <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data" id="workexperience">
+                            <form action="update_workexperience.php" method="post" enctype="multipart/form-data" id="workexperience">
                                 <div>
                                     <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>" required>
                                 </div>
@@ -189,9 +161,9 @@ if (isset($_POST["update"])) {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="form-label grey" for="start_date">Start Date</label>
-                                        <input class="form-control" type="date" name="startDate" id="start_date" value="<?php echo $startdate; ?>">
+                                        <input class="form-control" type="date" name="startDate" id="start_date" value="<?php echo $startDate; ?>">
                                         <label class="form-label grey" for="end_date">End Date</label>
-                                        <input class="form-control" type="date" name="endDate" id="end_date" value="<?php echo $enddate; ?>">
+                                        <input class="form-control" type="date" name="endDate" id="end_date" value="<?php echo $endDate; ?>">
                                     </div>
                                 </div>
                                 <div class="row mt-4">
@@ -209,7 +181,7 @@ if (isset($_POST["update"])) {
                                 </div>
                                 <div class="row mb-2">
                                     <label for="exampleFormControlTextarea1" class="form-label">Job Description:</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value="<?php echo $jobdescription; ?>"></textarea>
                                 </div>
 
                                 <div class="row">

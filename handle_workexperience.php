@@ -7,26 +7,7 @@ if (!isset($_SESSION["loggedin"]) or $_SESSION["loggedin"]!==true){
 }
 include "config.php";
 
-$sql_1 = "SELECT * FROM users ";
-#execute query
-$result_1 = mysqli_query($link, $sql_1);
 
-#check
-if ($result_1) {
-    $data_1 = mysqli_num_rows($result_1);
-#is there data here?
-    if ($data_1 > 0) {
-
-
-        while ($row = mysqli_fetch_array($result_1)) {
-            $id=$row['id'];
-            $lastname = $row['lastname'];
-            $firstname = $row['firstname'];
-            $emailAddress = $row['emailAddress'];
-
-        }
-    }
-}
 
 if (isset($_POST["work"])){
 
@@ -38,8 +19,9 @@ if (isset($_POST["work"])){
     $industry = $_POST["industry"];
     $jobtype =$_POST['jobtype'];
     $skills = $_POST["skills"];
-    $startdate =$_POST['startDate'];
-    $enddate =$_POST['endDate'];
+    $jobdescription=$_POST['jobdescription'];
+    $startDate =$_POST['startDate'];
+    $endDate =$_POST['endDate'];
 
 
 
@@ -51,11 +33,11 @@ if (isset($_POST["work"])){
 
 
     // insert
-    $sql = "INSERT INTO `unemployment` ( `employer`, `jobtitle`, `country`, `industry`, `jobtype`, `skills`, `startdate`, `enddate`, `cv`) 
-            VALUES ('$employer','$jobtitle','$country','$industry','$jobtype','$skills','$startdate','$enddate','$cvname')";
+    $sql_w = "INSERT INTO `work`( `employer`, `jobtitle`, `country`, `industry`, `jobtype`, `skills`, `jobdescription`, `startDate`, `endDate`, `cv`)
+              VALUES ('$employer','$jobtitle','$country','$industry','$jobtype','$skills','$jobdescription','$startDate','$endDate','$cvname')";
 
 
-    $result = mysqli_query($link,$sql);
+    $result_w = mysqli_query($link,$sql_w);
 
     // cv
     if (move_uploaded_file($cvtemp,$cvfolder)){
@@ -66,12 +48,12 @@ if (isset($_POST["work"])){
     }
 
 
-    if ($result){
+    if ($result_w){
         echo "<p class='alert alert-success'>Records have been Added</p>";
         header("location:unemployment_form.php");
     }else{
 
-        echo "<p class='alert alert-danger'>Error executing query $sql</p>".mysqli_error($link);
+        echo "<p class='alert alert-danger'>Error executing query $sql_w</p>".mysqli_error($link);
     }
 
 

@@ -27,14 +27,14 @@ if (isset($_POST["submit"])){
     $helbid = $_POST["helbid"];
     $krapin = $_POST["krapin"];
     $county =$_POST['county'];
-    $subcounty =$_POST['sub-county'];
+    $subcounty =$_POST['subcounty'];
     $gender = $_POST["gender"];
 
 
 
     // insert
-    $sql_p= "INSERT INTO `personal information`( `lastname`, `firstname`, `middlename`, `othernames`, `dob`, `age`, `emailAddress`, `phoneNumber`, `nationalid`, `helbid`, `krapin`, `county`, `subcounty`, `gender`) 
-              VALUES ('$lastname','$firstname','$middlename','$othernames','$dob','$age','$emailAddress','$phoneNumber','$nationalid','$helbid','$krapin','$county','$subcounty','$gender'";
+    $sql_p= "INSERT INTO `personal information` ( `lastname`, `firstname`, `middlename`, `othernames`, `dob`, `age`, `emailAddress`, `phoneNumber`, `nationalid`, `helbid`, `krapin`, `county`, `subcounty`, `gender`) 
+              VALUES ('$lastname','$firstname','$middlename','$othernames','$dob','$age','$emailAddress','$phoneNumber','$nationalid','$helbid','$krapin','$county','$subcounty','$gender')";
 
 
     $result_p = mysqli_query($link,$sql_p);

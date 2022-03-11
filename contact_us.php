@@ -16,8 +16,8 @@ if(isset($_POST['submit'])) {
     $message = $_POST['message'];
 
 
-    $sql = "INSERT INTO `contact us`( `firstname`,`lastName`,`emailAddress`, `message`) 
-         VALUES ('$firstname',$lastname'$emailAddress','$message')";
+    $sql = "INSERT INTO `contact us`( `lastName`, `firstname`, `emailAddress`, `message`) 
+           VALUES ('$lastname','$firstname','$emailAddress','$message')";
 
     $result = mysqli_query($link, $sql);
 
@@ -35,7 +35,7 @@ if(isset($_POST['submit'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PERSONAL INFORMATION</title>
+    <title>CONTACT US</title>
     <link rel="stylesheet" href="css/unemployment_form.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -64,9 +64,13 @@ if(isset($_POST['submit'])) {
             <ul class="">
 
             </ul>
-            <ul class="contacts_icons" style="display:inline-block">
-                <li style="list-style: none;"><a style="text-decoration: none" href="https://labour.go.ke/"><i class="fa fa-globe fa-lg text-white"></i></a></li>
-                <li style="list-style: none;"><a style="text-decoration: none" href="https://twitter.com/labourspke?lang=en"><i class="fa fa-twitter fa-lg text-white"></i></a></li>
+            <ul class="contacts_icons" style="display:inline-block; padding: 40px;">
+                <li style="list-style: none;padding: 20px"><a style="text-decoration: none" href="https://labour.go.ke/contact-us/"><i class="fa fa-envelope fa-lg text-white"></i><span class="text-white" style="padding-left: 10px;">info@labour.org.ke</span></a></li>
+                <li style="list-style: none; padding: 20px"><a style="text-decoration: none" href="https://labour.go.ke/contact-us/"><i class="fa fa-phone fa-lg text-white"></i><span class="text-white" style="padding-left: 10px;">+254 (0) 2729801/804-819</span></a></li>
+                <li style="list-style: none; padding: 20px"><a style="text-decoration: none" href="https://labour.go.ke/"><i class="fa fa-globe fa-lg text-white"></i></a><span class="text-white" style="padding-left: 10px;">www.labour.go.ke</span></li>
+                <li style="list-style: none; padding: 20px"><a style="text-decoration: none" href="https://labour.go.ke/contact-us/"><i class="fa fa-map-marker fa-lg text-white"></i><address class="text-white" style="transform: translate(7%,-40%);"">Ministry of Labour ,
+                            Bishops Road, Social Security House<br>
+                            P.O. Box 40326 – 00100, Nairobi</address></a></li>
             </ul>
         </div>
 
@@ -89,7 +93,7 @@ if(isset($_POST['submit'])) {
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="5" required></textarea>
+                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="10" required></textarea>
                 </div>
                 <div>
                     <input type="submit" class="bg bg-primary text-white border-0 rounded-1 mb-4 float-end col-md-2" name=submit id="submit" value="Submit">

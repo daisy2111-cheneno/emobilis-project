@@ -8,29 +8,55 @@ if (!isset($_SESSION["loggedin"]) or $_SESSION["loggedin"]!==true){
     exit();
 }
 include "config.php";
+$sql= "SELECT * FROM users ";
+#execute query
+$result = mysqli_query($link, $sql);
+
+#check
+if ($result) {
+    $data= mysqli_num_rows($result);
+#is there data here?
+    if ($data > 0) {
 
 
-if (isset($_POST["submit"]) and !empty($_SESSION["id"])){
+        while ($row = mysqli_fetch_array($result)) {
+            $id=$row['id'];
+            $lastname = $row['lastname'];
+            $firstname = $row['firstname'];
+            $emailAddress = $row['emailAddress'];
+
+        }
+    }
+}
+
+if (isset($_SESSION["id"]) and !empty($_SESSION["id"])){
 
     $id = $_SESSION["id"];
 
-    $sql = "SELECT * FROM `work` WHERE id =$id";
+    $sql_w = "SELECT * FROM `work` WHERE id =$id";
 
-    $result = mysqli_query($link, $sql);
+    $result_w = mysqli_query($link, $sql_w);
 
-    if ($result){
+    if ($result_w){
 
-        $data = mysqli_num_rows($result);
+        $data_w = mysqli_num_rows($result_w);
 
-        if ($data==1){
+        if ($data_w==1){
 
-            $row = mysqli_fetch_array($result);
+            $row = mysqli_fetch_array($result_w);
 
-            $employer = $_POST["employer"];
-            $jobtitle = $_POST["jobtitle"];
-            $startdate =$_POST['startDate'];
-            $enddate =$_POST['endDate'];
+            $employer = $row["employer"];
+            $jobtitle = $row["jobtitle"];
+            $country=$row['country'];
+            $industry=$row['industry'];
+            $jobtype=$row['jobtype'];
+            $startDate=$row['startDate'];
+            $endDate =$row['endDate'];
+            $skills=$row['skills'];
+            $jobdescription=$row['jobdescription'];
             $cv =$row['cv'];
+
+            $filepath = "uploads/$cv";
 
 
             ?>
@@ -38,7 +64,7 @@ if (isset($_POST["submit"]) and !empty($_SESSION["id"])){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PERSONAL INFORMATION</title>
+    <title>VIEW WORK EXPERIENCE</title>
     <link rel="stylesheet" href="css/unemployment_form.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,41 +97,66 @@ if (isset($_POST["submit"]) and !empty($_SESSION["id"])){
                 <div class="card row m-2">
                     <div class="card-body">
                         <div>
-                            <a CLASS="btn btn-danger col-md-8" href="unemployment_form.php">BACK</a>
+                            <a CLASS="btn btn-primary col-md-3" href="unemployment_form.php">BACK</a>
                         </div>
                     </div>
 
                 </div>
-                <div class="card row m-2 bg-primary">
-                    <div class="card-body">
-                        <div class="p-2 text-center">
-                            <label class="form-label">Are you sure you want to delete this record?</label> <br>
-                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <div class="modal-body">
+                    <div class="row disabled" id="workexperience">
+                        <div class="row">
+                            <div>
+                                <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>" required>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class="form-label h6">EMPLOYER</label>
-                            <p class="text-warning"><?php echo $employer; ?></p>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label grey">Employer</label>
+                                    <input class="form-control" type="text" name="employer" value="<?php echo $employer; ?>">
+                                    <label class="form-label grey">Job Title</label>
+                                    <input class="form-control" type="text" name="jobtitle" value="<?php echo $jobtitle; ?>">
+                                </div>
+                            </div>
                         </div>
-                        <hr>
-                        <div class="col">
-                            <label class="form-label h6">JOB TITLE</label>
-                            <p class="text-warning"><?php echo $jobtitle; ?></p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label grey" for="country">Country</label>
+                                <input class="form-control" type="text" name="country" id="country" value="<?php echo $country; ?>">
+                                <label class="form-label grey" for="industry">Industry</label>
+                                <input class="form-control" type="text" name="industry" id="industry" value="<?php echo $industry; ?>">
+                            </div>
                         </div>
-                        <hr>
-                        <div class="col">
-                            <label class="form-label h6">START DATE</label>
-                            <p class="text-warning"><?php echo $startdate; ?></p>
-                        </div>
-                        <div class="col">
-                            <label class="form-label h6">END DATE</label>
-                            <p class="text-warning"><?php echo $enddate; ?></p>
-                        </div>
-                        <hr>
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label grey" for="jobtype">Job Type</label>
+                                <input class="form-control" type="text" name="jobtype" id="jobtype" placeholder="contact, permanent" value="<?php echo $jobtype; ?>">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="form-label grey" for="start_date">Start Date</label>
+                                <input class="form-control" type="date" name="startDate" id="start_date" value="<?php echo $startDate; ?>">
+                                <label class="form-label grey" for="end_date">End Date</label>
+                                <input class="form-control" type="date" name="endDate" id="end_date" value="<?php echo $endDate; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="skills" class="form-label">Skills</label>
+                                <input class="form-control" name="skills" id="skills" value="<?php echo $skills; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <label for="exampleFormControlTextarea1" class="form-label">Job Description:</label>
+                            <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="jobdescription" value="<?php echo $jobdescription; ?>">
+                        </div>
 
                     </div>
-
                 </div>
+
             </div>
     </div>
 </div>

@@ -23,7 +23,6 @@ if (isset($_POST['login'])){
                 $id = $row['id'];
                 $emailAddress = $row["emailAddress"];
                 $password =$row["password"];
-                $firstName =$row["firstName"];
 
 
                 //verify password

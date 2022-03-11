@@ -4,8 +4,9 @@ include 'config.php';
 //the moment the register button is clicked,
 if (isset($_POST["signup"])){
 
-    $firstName = $_POST["firstName"];
+
     $lastName = $_POST['lastName'];
+    $firstName = $_POST["firstName"];
     $emailAddress = $_POST["emailAddress"];
     $password = $_POST['password'];
     $confirmPassword = $_POST["confirmPassword"];
@@ -36,8 +37,8 @@ if (isset($_POST["signup"])){
 
     if (empty($passError) and empty($conPassErr)){
 
-        $sql = "INSERT INTO `users`( `lastname`, `firstname`, `emailAddress`, `password`, `usertype`, `timestamp`)
-                VALUES ('$firstName','$lastName','$emailAddress','$storePass','$usertype','$timestamp')";
+        $sql = "INSERT INTO `users`( `lastname`, `firstname`, `emailAddress`, `password`, `usertype`)
+                VALUES ('$firstName','$lastName','$emailAddress','$storePass','$usertype')";
 
         $result=mysqli_query($link,$sql);
 

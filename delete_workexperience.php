@@ -16,7 +16,7 @@ $result_1 = mysqli_query($link, $sql_1);
 
 if (isset($_POST["submit"]) and !empty($_POST["id"])){
     $id = $_POST["id"];
-    $sql = "DELETE FROM `unemployment` WHERE id=$id";
+    $sql = "DELETE FROM `work`  WHERE id=$id";
     $result = mysqli_query($link, $sql);
 
     if ($result){

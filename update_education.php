@@ -11,8 +11,8 @@ include_once "common.php";
 $common = new Common();
 $allCounties = $common->getCounties($link);
 
-$id=$_SESSION['id'];
-$sql= "SELECT * FROM users where id=$id";
+
+$sql= "SELECT * FROM users ";
 #execute query
 $result = mysqli_query($link, $sql);
 
@@ -37,7 +37,7 @@ if ($result) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UNEMPLOYMENT FORM</title>
+    <title>FORM</title>
     <link rel="stylesheet" href="css/unemployment_form.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -138,8 +138,8 @@ if ($result) {
                     </div>
 
                     <div class="col">
-                        <label for="subcounty">Sub-county<span class="">*</span></label>
-                        <select class="inputstyle form-control" name="subcounty" id="subcountyId">
+                        <label for="sub-county">Sub-county<span class="">*</span></label>
+                        <select class="inputstyle form-control" name="sub-county" id="sub-countyId">
                             <option>Sub-County</option>
                         </select>
                         <script>
@@ -148,8 +148,8 @@ if ($result) {
                                 $.post("ajax.php",{getStatesByCounty:'getStatesByCounty',countyId:countyId},function (response) {
                                     // alert(response);
                                     var data = response.split('^');
-                                    var subcountyData = data[1];
-                                    $("#subcountyId").html(subcountyData);
+                                    var sub_countyData = data[1];
+                                    $("#sub-countyId").html(sub_countyData);
                                 });
                             }
                         </script>
@@ -176,55 +176,54 @@ if ($result) {
 
                 <h4 class="m-4 text-center">EDUCATION BACKGROUND</h4>
                 <!-- Button trigger modal -->
+                <div>
+                    <button type="button" class="btn btn-primary float-end mb-4 col-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Add Qualifications
+                    </button>
 
-            <div>
-                <button type="button" class="btn btn-primary float-end mb-4 col-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Add Qualifications
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Educational Background</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="handle_educationbackground.php" method="post" enctype="multipart/form-data" class="education">
-                                    <div class="row p-2">
-                                        <div class="col-md-12">
-                                            <label class="form-label grey" for="institution">Institution:</label>
-                                            <input class="form-control" type="text" name="institution" id="institution" placeholder="Employer">
-                                            <label class="form-label grey" for="qualification">Qualification:</label>
-                                            <input class="form-control" type="text" name="qualification" id="qualification" placeholder="Job Title">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Educational Background</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="handle_educationbackground.php" method="post" enctype="multipart/form-data" class="education">
+                                        <div class="row p-2">
+                                            <div class="col-md-12">
+                                                <label class="form-label grey" for="institution">Institution:</label>
+                                                <input class="form-control" type="text" name="institution" id="institution" placeholder="Employer">
+                                                <label class="form-label grey" for="qualification">Qualification:</label>
+                                                <input class="form-control" type="text" name="qualification" id="qualification" placeholder="Job Title">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row p-2">
-                                        <div class="col-md-12">
-                                            <label class="form-label grey" for="startdate">Start Date:</label>
-                                            <input class="form-control grey" type="date" name="datestarted" id="startdate" placeholder="Employer">
-                                            <label class="form-label grey" for="enddate">End Date:</label>
-                                            <input class="form-control grey" type="date" name="dateended" id="enddate" placeholder="Job Title">
+                                        <div class="row p-2">
+                                            <div class="col-md-12">
+                                                <label class="form-label grey" for="startdate">Start Date:</label>
+                                                <input class="form-control grey" type="date" name="datestarted" id="startdate" placeholder="Employer">
+                                                <label class="form-label grey" for="enddate">End Date:</label>
+                                                <input class="form-control grey" type="date" name="dateended" id="enddate" placeholder="Job Title">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row p-2">
-                                        <div class="col-md-12">
-                                            <label class="form-label grey" for="certificate">Certificate</label>
-                                            <input class="form-control" type="file" name="certificate" id="certificate">
+                                        <div class="row p-2">
+                                            <div class="col-md-12">
+                                                <label class="form-label grey" for="certificate">Certificate</label>
+                                                <input class="form-control" type="file" name="certificate" id="certificate">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <input type="submit" name="education" class="col-6 btn btn-outline-primary" value="SUBMIT">
-                                    </div>
-                                </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <input type="submit" name="education" class="col-6 btn btn-outline-primary" value="SUBMIT">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
                 <?php
                 include "config.php";
 
@@ -311,7 +310,6 @@ if ($result) {
                                 <div class="modal-body">
 
                                     <form action="handle_workexperience.php" method="post" enctype="multipart/form-data" id="workexperience">
-
                                         <div class="row">
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -380,7 +378,7 @@ if ($result) {
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
                 <?php
                 include "config.php";
 
@@ -452,8 +450,8 @@ if ($result) {
 
 
         </div>
-</div>
+    </div>
 
-<footer class="m-3">Copyright &copy; 2022 by The Ministry of Labour and Social Protection. all rights reserved.</footer>
+    <footer class="m-3">Copyright &copy; 2022 by The Ministry of Labour and Social Protection. all rights reserved.</footer>
 </body>
 </html>

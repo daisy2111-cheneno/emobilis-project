@@ -8,13 +8,31 @@ if (!isset($_SESSION["loggedin"]) or $_SESSION["loggedin"]!==true){
 }
 
 include "config.php";
+$sql= "SELECT * FROM users ";
+#execute query
+$result = mysqli_query($link, $sql);
 
+#check
+if ($result) {
+    $data= mysqli_num_rows($result);
+#is there data here?
+    if ($data > 0) {
+
+
+        while ($row = mysqli_fetch_array($result)) {
+            $id=$row['id'];
+            $lastname = $row['lastname'];
+            $firstname = $row['firstname'];
+            $emailAddress = $row['emailAddress'];
+            $password= $row['password'];
+
+        }
+    }
+}
 
 //1.When the reset button is clicked, define the variables in the reset form
 if(isset($_POST['reset'])) {
 
-    $id=$_SESSION['id'];
-    $password=$_SESSION['password'];
     $oldPass=$_POST['oldPass'];
     $newPass = $_POST['newPass'];
     $confirmPass = $_POST['confirmPass'];
@@ -32,7 +50,6 @@ if(isset($_POST['reset'])) {
 //4(a) verify that the new password and confirm password match,
         if ($confirmPass!=$newPass) {
             $conPassErr = "<p>Passwords do not Match!</p>";
-            echo $conPassErr;
         }//4(b) if the new password and the confirm password don't match, echo conPassErr
 
 
@@ -71,7 +88,7 @@ if(isset($_POST['reset'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PERSONAL INFORMATION</title>
+    <title>RESET PASSWORD</title>
     <link rel="stylesheet" href="css/unemployment_form.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -95,35 +112,19 @@ if(isset($_POST['reset'])) {
         </div>
     </div>
     <div class="row m-2">
-        <div class="card">
-            <div class="card-header text-primary bg-white h4">Reset Password</div>
+        <div class="row">
+            <div class="card">
+            <h2 class="card-header bg-white h4">Reset Password</h2>
             <div class="card-body">
                 <form action="reset_password.php" method="post" enctype="multipart/form-data">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Old Password</span>
-                        <input type="password" name="oldPass" class="form-control" aria-describedby="basic-addon1" id="opwd" required>
+                        <span class="input-group-text" id="basic-addon1">Email Address</span>
+                        <input type="email" name="emailAddress" class="form-control" aria-describedby="basic-addon1" id="opwd" required>
                     </div>
-                    <span class="eye">
-                    <i class="fa fa-eye grey" id="oeye" style="position: absolute; transform: translate(0%,-250%); margin: auto auto auto 90%; width: 300px;cursor: pointer"></i>
-                </span>
-                    <script>
-                        var opwd =document.getElementById('opwd');
-                        var oeye =document.getElementById('oeye');
 
-
-                        oeye.addEventListener('click',toggle);
-
-                        function toggle(){
-
-                            oeye.classList.toggle('active');
-
-                            (opwd.type ==='password') ? opwd.type='text':
-                                opwd.type = 'password';
-                        }
-                    </script>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">New Password</span>
-                        <input type="password" name="newPass" class="form-control" aria-describedby="basic-addon1" id="pwd" required>
+                        <input type="password" name="newpass" class="form-control" aria-describedby="basic-addon1" id="pwd" required>
                     </div>
                     <span class="eye">
                     <i class="fa fa-eye grey" id="eye" style="position: absolute; transform: translate(0%,-250%); margin: auto auto auto 90%; width: 300px;cursor: pointer"></i>
@@ -143,6 +144,7 @@ if(isset($_POST['reset'])) {
                                 pwd.type = 'password';
                         }
                     </script>
+
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon2">Confirm Password</span>
                         <input type="password" name="confirmPass" class="form-control" aria-describedby="basic-addon2" id="cpwd" required>
@@ -168,7 +170,8 @@ if(isset($_POST['reset'])) {
                     </script>
 
 
-                    <div class="input-group mb-3"><input type="submit" name="reset" value="Reset Password" class="btn btn-primary col-md-3 ">
+                    <div class="input-group mb-3 ">
+                        <input type="submit" name="reset" value="Reset Password" class="btn btn-primary col-md-3 " style="transform: translate(300%,0%)">
                     </div>
                 </form>
             </div>

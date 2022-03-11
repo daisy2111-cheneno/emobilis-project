@@ -2,14 +2,34 @@
 <?php
 
 include "config.php";
+$sql= "SELECT * FROM users ";
+#execute query
+$result = mysqli_query($link, $sql);
 
+#check
+if ($result) {
+    $data= mysqli_num_rows($result);
+#is there data here?
+    if ($data > 0) {
+
+
+        while ($row = mysqli_fetch_array($result)) {
+            $id=$row['id'];
+            $lastname = $row['lastname'];
+            $firstname = $row['firstname'];
+            $emailAddress = $row['emailAddress'];
+            $password= $row['password'];
+
+        }
+    }
+}
 
 //1.When the reset button is clicked, define the variables in the reset form
 if (isset($_POST['reset'])) {
 
     $emailAddress = $_POST['emailAddress'];
-    $newPass = $_POST['newPass'];
-    $confirmPass = $_POST['confirmPass'];
+    $newPass = $_POST['newpass'];
+    $confirmPass = $_POST['confirmpass'];
 
 // Validate
 //2.(a) if the length of the new password is less than 6, echo passErr
@@ -35,7 +55,7 @@ if (isset($_POST['reset'])) {
 
         if ($result) {
             echo "<p class='alert alert-info'>Password Reset was Successful</p>";
-            header("location:reglogin.php");
+            header("location:index.php");
 
 
         } else {
@@ -68,7 +88,7 @@ if (isset($_POST['reset'])) {
     <div class="row">
         <div class="col-5 darkblue">
             <div class="row mt-4">
-                <h3 class="text-center text-white ">Hello Friend!</h3>
+                <h3 class="text-center text-white ">Hello <?php echo $firstname; ?></h3>
             </div>
             <div class="row">
                 <p class="text-center text-white p-2 ">Forgot your password?</p>

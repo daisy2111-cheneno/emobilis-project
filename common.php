@@ -13,8 +13,8 @@ class Common {
         return $result;
     }
 
-    public function getStatesByCounty($link,$countyId) {
-        $query = "SELECT * FROM `sub_county` WHERE countyCode='$$countyCode;'";
+    public function getStatesByCounty($link,$countyCode) {
+        $query = "SELECT * FROM `sub_county` WHERE countyCode='$countyCode;'";
         $result = $link->query($query);
         return $result;
     }
